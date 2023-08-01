@@ -15,7 +15,8 @@
 
 <body>
   <!-- <script src="libraries/p5.svg.js"></script> -->
-  <script src="sketch.js"></script>
+  <script src="/src/sketch.js"></script>
+  <script src="/src/node.js"></script>
 
   <div class="nav">
     <a href="" class="dashboard">Dashboard</a>
@@ -40,6 +41,13 @@
   <div class="container">
 
     <div class="left-container">
+     <!-- Canvas Placeholder -->
+ <div id="canvas-placeholder">
+  <!-- The canvas will be created dynamically by p5.js -->
+</div>
+    </div>
+ 
+    <div class="right-container">
       <div class="traverse">
         <p>Traversal:</p>
         <span class="traverse-data">12,21,21,2,12,2,2,2,2,2,2,2,2,2,2,2,2,2,22</span>
@@ -48,13 +56,6 @@
         <p>Instrunctions</p>
         <span class="instrunction-data">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eum
           consequatur. Rerum non debitis maxime, qui ut enim quisquam consequuntur necessitatibus.</span>
-      </div>
-    </div>
-
-    <div class="right-container">
-      <!-- Canvas Placeholder -->
-      <div id="canvas-placeholder">
-        <!-- The canvas will be created dynamically by p5.js -->
       </div>
     </div>
   </div>

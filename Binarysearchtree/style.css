@@ -82,7 +82,14 @@ body {
   margin-top: 1rem;
 }
 
+
 .left-container {
+  flex: 2;
+  background-color: #c4bae6;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.right-container {
   flex: 1;
   background-color: #1a237e;
   padding: 20px;
@@ -94,12 +101,6 @@ body {
   font-family: 'REM', sans-serif;
 }
 
-.right-container {
-  flex: 2;
-  background-color: #c4bae6;
-  padding: 20px;
-  box-sizing: border-box;
-}
 
 #canvas-placeholder {
   width: 100%;
@@ -114,6 +115,8 @@ body {
   font-weight: bold;
   background-color: #caffb7;
   padding: 1em 2em;
+  margin: 3em 0em;
+border-radius: 9px;
 }
 
 .traverse p {
@@ -126,6 +129,7 @@ body {
   padding: 0.4em 1.5rem;
   margin-top: 1rem;
   background-color: #caffb7;
+  border-radius: 9px;
 }
 
 .instrunction p {
