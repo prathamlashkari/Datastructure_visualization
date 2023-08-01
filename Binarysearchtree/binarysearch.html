@@ -10,9 +10,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <script src="libraries/p5.min.js"></script>
-  <script src="libraries/p5.sound.min.js"></script>
   <!-- <script src="libraries/p5.svg.js"></script> -->
-  <!-- <script src="path/to/p5.svg.js"></script>, -->
 </head>
 
 <body>
@@ -28,11 +26,11 @@
   <!-- List for the buttons -->
   <div class="btn-container">
     <input class="inp" type="number" id="value" placeholder="Enter value" min="1" required>
-    <button class="button" id="insert-btn">Insert</button>
-    <button class="button" id="delete-btn">Delete</button>
-    <button class="button" id="search-btn">Search</button>
-    <button class="button" id="traversal-btn">Traversal</button>
-    <button class="button" id="clear-btn">Clear</button>
+    <button class="buttons" id="insert-btn">Insert</button>
+    <button class="buttons" id="delete-btn">Delete</button>
+    <button class="buttons" id="search-btn">Search</button>
+    <button class="buttons" id="traversal-btn">Traversal</button>
+    <button class="buttons" id="clear-btn">Clear</button>
     <label for="speed" class="animation-text">Animation Speed:</label>
     <input type="range" id="speed" min="1" max="10" value="5">
 
@@ -48,7 +46,8 @@
       </div>
       <div class="instrunction">
         <p>Instrunctions</p>
-        <span class="instrunction-data">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eum consequatur. Rerum non debitis maxime, qui ut enim quisquam consequuntur necessitatibus.</span>
+        <span class="instrunction-data">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eum
+          consequatur. Rerum non debitis maxime, qui ut enim quisquam consequuntur necessitatibus.</span>
       </div>
     </div>
 
@@ -61,11 +60,21 @@
   </div>
 
   <div class="footerbst">
-   
+
     <span class="height">height of tree: <span class="height-data">4</span></span>
     <div class="creaername">Created By: Golu</div>
   </div>
 
+  <div id="traversal-popup" class="popup">
+    <button id="close-popup-btn">&times;</button>
+    <h3>Select Traversal Method:</h3>
+    <div class="traversal-buttons">
+      <button class="travbtn" id="inorder-btn">In-Order</button>
+      <button class="travbtn" id="preorder-btn">Pre-Order</button>
+      <button class="travbtn" id="postorder-btn">Post-Order</button>
+    </div>
+  </div>
+  <script src="binaryserach.js"></script>
 </body>
 
 </html>

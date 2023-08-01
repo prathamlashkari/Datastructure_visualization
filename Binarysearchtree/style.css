@@ -29,9 +29,6 @@ body {
   color: rgb(255, 255, 255);
   font-weight: bold;
 }
-
-
-
 .about {
   font-size: 1.6em;
   color: rgb(255, 255, 255);
@@ -47,11 +44,19 @@ body {
 
 }
 
-button {
+.buttons {
   width: 5rem;
   font-size: 1rem;
   background-color: #96e7aa;
   border-radius: 1em;
+  cursor: pointer;
+}
+.buttons:hover {
+  width: 6rem;
+  font-size: 1.1rem;
+  background-color: #23d650;
+  border-radius: 1em;
+  cursor: pointer;
 }
 
 .inp {
@@ -140,4 +145,55 @@ button {
   justify-content: space-between;
   padding: 1.2em 1.2em;
   font-size: 1.4rem;
+}
+
+/* css for the traversal box */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #c9ff94;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 6px solid #ea6060;
+  border-radius: 30px;
+}
+
+#close-popup-btn {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #1d1414;
+  border: none;
+  background: none;
+}
+
+.traversal-buttons {
+  display: flex;
+  justify-content: cn;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.travbtn {
+  width: 6rem;
+  margin: 1rem 0rem 0.4rem 0rem;
+  height: 1.9rem;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: #96e7aa;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.travbtn:hover {
+  background-color: #4ecb6e;
+  width: 7rem;
+  height: 2rem;
 }
