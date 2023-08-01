@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@1,200&family=Raleway:ital,wght@0,700;1,300&display=swap');
+
 html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #c4bae6;
 }
 
-
+/* for the navigation barr */
 
 .nav {
   background-color: #1a237e;
@@ -35,56 +38,106 @@ body {
   font-weight: bold;
 }
 
-.btn-container{
-  margin-top:0.5em ;
+/*  css for the buttons container */
+.btn-container {
+  margin-top: 1.5em;
   display: flex;
   justify-content: center;
   gap: 2em;
 
 }
 
-button{
+button {
   width: 5rem;
   font-size: 1rem;
   background-color: #96e7aa;
-  border-radius:1em ;
-}
-.inp{
-  width: 20rem;
-  height: 1.3rem;
+  border-radius: 1em;
 }
 
-.animation-text{
+.inp {
+  width: 24rem;
+  height: 1.6rem;
+  border-color: #23fd10;
+  background-color: #bcebf3;
+  border-radius: 1rem;
+  padding: 0em 1em;
+}
+
+.animation-text {
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-/* Add the following CSS rules to your existing style.css file */
-
+/* css for left and right container */
 .container {
   display: flex;
-  height: 100vh; /* Adjust the height as needed */
+  height: 76vh;
   justify-content: space-between;
-  max-width: 100%; /* Add this line to ensure containers are not wider than the screen */
+  max-width: 100%;
   margin-top: 1rem;
 }
 
 .left-container {
-  flex: 1; /* Make the left container flexible, it will take up remaining space */
-  background-color: #f0f0f0; /* Set the background color for the left container */
-  padding: 20px; /* Add padding to create some space around the content */
-  box-sizing: border-box; /* Add this line to include padding in container width */
+  flex: 1;
+  background-color: #1a237e;
+  padding: 20px;
+  box-sizing: border-box;
   margin: 1.2rem;
+  border: 2px solid black;
+  border-radius: 2rem;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'REM', sans-serif;
 }
 
 .right-container {
-  flex: 2; /* Make the right container twice the size of the left container */
-  background-color: #fff; /* Set the background color for the right container */
-  padding: 20px; /* Add padding to create some space around the content */
-  box-sizing: border-box; 
+  flex: 2;
+  background-color: #c4bae6;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #canvas-placeholder {
   width: 100%;
-  height: 100vh;
+  height: 72vh;
+}
+
+
+/* css for the traversal and instrunction box */
+
+.traverse {
+  border: 2px solid black;
+  font-weight: bold;
+  background-color: #caffb7;
+  padding: 1em 2em;
+}
+
+.traverse p {
+  font-size: 1.4em;
+  display: inline;
+}
+
+.instrunction {
+  border: 2px solid black;
+  padding: 0.4em 1.5rem;
+  margin-top: 1rem;
+  background-color: #caffb7;
+}
+
+.instrunction p {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+
+/* css for the footer */
+
+.footerbst {
+  background-color: #1a237e;
+  height: 0.7rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2em 1.2em;
+  font-size: 1.4rem;
 }
