@@ -14,9 +14,9 @@
 </head>
 
 <body>
-  <!-- <script src="libraries/p5.svg.js"></script> -->
   <script src="/src/sketch.js"></script>
   <script src="/src/node.js"></script>
+  <script src="/src/tree.js"></script>
 
   <div class="nav">
     <a href="" class="dashboard">Dashboard</a>
@@ -26,7 +26,14 @@
 
   <!-- List for the buttons -->
   <div class="btn-container">
-    <input class="inp" type="number" id="value" placeholder="Enter value" min="1" required>
+    <input class="inp" type="text" id="value" placeholder="Enter value" required>
+    <label for="data-type">Select Data Type:</label>
+    <select id="data-type">
+      <option value="integer">Integer</option>
+      <option value="char">Character</option>
+      <option value="string">String</option>
+    </select>
+
     <button class="buttons" id="insert-btn">Insert</button>
     <button class="buttons" id="delete-btn">Delete</button>
     <button class="buttons" id="search-btn">Search</button>
@@ -41,20 +48,20 @@
   <div class="container">
 
     <div class="left-container">
-     <!-- Canvas Placeholder -->
- <div id="canvas-placeholder">
-  <!-- The canvas will be created dynamically by p5.js -->
-</div>
+      <!-- Canvas Placeholder -->
+      <div id="canvas-placeholder">
+        <!-- The canvas will be created dynamically by p5.js -->
+      </div>
     </div>
- 
+
     <div class="right-container">
       <div class="traverse">
         <p>Traversal:</p>
-        <span class="traverse-data">12,21,21,2,12,2,2,2,2,2,2,2,2,2,2,2,2,2,22</span>
+        <span class="traverse-data"></span>
       </div>
       <div class="instrunction">
         <p>Instrunctions</p>
-        <span class="instrunction-data">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eum
+        <span class="instrunction-data">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam numquam explicabo, eveniet consequuntur corporis et, modi sit ad officia quod enim. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eum
           consequatur. Rerum non debitis maxime, qui ut enim quisquam consequuntur necessitatibus.</span>
       </div>
     </div>
