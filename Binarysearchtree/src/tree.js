@@ -1,15 +1,10 @@
-/***
- * Tree.js
- *
- * This file defines the Tree class. The Tree class serves as a wrapper for a
- * root node, wrapping methods such as addValue or search, but also provides
- * higher-level functionality, such as setting the coordinates of the entire
- * tree, or drawing the entire tree.
- *
- * The tree class is also responsible for animating itself, and relies only
- * on an instance of the Controls class to provide the interval between frames
- * of animation
-***/
+// const instructionPanel = document.querySelector('.instruction-panel');
+const traverpop = document.querySelector("#traversal-popup");
+
+// Function to add an instruction to the panel
+function addInstruction(instruction) {
+    instructionPanel.innerText += instruction + '\n';
+}
 
 class Tree {
     constructor(x, y, backgroundColor) {
@@ -36,8 +31,78 @@ class Tree {
 
         // Draw the tree upon creation (to show the background)
         this.draw();
+        // Event listener for the In-Order Traversal button
+        document.querySelector("#inorder-btn").addEventListener("click", () => {
+            const inOrderResult = this.inOrderTraversal();
+            traverpop.style.display = "none";
+            document.querySelector(".traverse-data").innerText = inOrderResult.join(", ");
+        });
+
+        // Event listener for the Pre-Order Traversal button
+        document.querySelector("#preorder-btn").addEventListener("click", () => {
+            traverpop.style.display = "none";
+            const preOrderResult = this.preOrderTraversal();
+            document.querySelector(".traverse-data").innerText = preOrderResult.join(", ");
+        });
+
+        // Event listener for the Post-Order Traversal button
+        document.querySelector("#postorder-btn").addEventListener("click", () => {
+            traverpop.style.display = "none";
+            const postOrderResult = this.postOrderTraversal();
+            document.querySelector(".traverse-data").innerText = postOrderResult.join(", ");
+        });
     }
 
+    // In-Order Traversal: Left-Root-Right
+    inOrderTraversal() {
+        const result = [];
+        this._inOrderTraversalRecursive(this.root, result);
+        return result;
+    }
+
+    // Pre-Order Traversal: Root-Left-Right
+    preOrderTraversal() {
+        const result = [];
+        this._preOrderTraversalRecursive(this.root, result);
+        return result;
+    }
+
+    // Post-Order Traversal: Left-Right-Root
+    postOrderTraversal() {
+        const result = [];
+        this._postOrderTraversalRecursive(this.root, result);
+        return result;
+    }
+
+    // Private helper method for in-order traversal
+    _inOrderTraversalRecursive(node, result) {
+        if (node) {
+            this._inOrderTraversalRecursive(node.leftNode, result);
+            result.push(node.value);
+            this._inOrderTraversalRecursive(node.rightNode, result);
+            addInstruction(`Visited Node: ${node.value} (In-Order Traversal)`);
+        }
+    }
+
+    // Private helper method for pre-order traversal
+    _preOrderTraversalRecursive(node, result) {
+        if (node) {
+            result.push(node.value);
+            addInstruction(`Visited Node: ${node.value} (Pre-Order Traversal)`);
+            this._preOrderTraversalRecursive(node.leftNode, result);
+            this._preOrderTraversalRecursive(node.rightNode, result);
+        }
+    }
+
+    // Private helper method for post-order traversal
+    _postOrderTraversalRecursive(node, result) {
+        if (node) {
+            this._postOrderTraversalRecursive(node.leftNode, result);
+            this._postOrderTraversalRecursive(node.rightNode, result);
+            result.push(node.value);
+            addInstruction(`Visited Node: ${node.value} (Post-Order Traversal)`);
+        }
+    }
     // Sets this instance's reference to a Controls instance so that an
     // animation interval can be set
     bindControls(controls) {

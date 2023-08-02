@@ -9,3 +9,4 @@ traversalButton.addEventListener("click", () => {
 closePopupButton.addEventListener("click", () => {
   traversalPopup.style.display = "none";
 });
+
