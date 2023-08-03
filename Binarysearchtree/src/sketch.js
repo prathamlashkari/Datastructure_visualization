@@ -12,27 +12,23 @@
 ***/
 
 // Controls the size of the visualization. Defaults to full-screen
-var CANVASWIDTH = window.innerWidth;
-var CANVASHEIGHT = window.innerHeight;
+// var CANVASWIDTH = window.innerWidth;
+var CANVASWIDTH = 1200;
+var CANVASHEIGHT = 650;
 
 // Constants for controlling the position of the binary tree
 const TREEX = CANVASWIDTH / 2;     // The x-coordinate of the root node
 const TREEY = 100;                 // The y-coordinate of the root node
-const BACKGROUNDCOLOR = 60;       // Background color of the visualization
-
-let canvas;
+const BACKGROUNDCOLOR = color("#a698d3 "); // Background color of the visualization
 
 function setup() {
-  const canvasContainer = select("#canvas-placeholder");
-  canvas = createCanvas(canvasContainer.width, canvasContainer.height);
-  canvas.parent("canvas-placeholder");
-  
-  // Create other necessary objects for the visualization
-  var tree = new Tree(TREEX, TREEY, BACKGROUNDCOLOR);
-  var explorer = new Explorer(canvas.canvas, tree.graphicsBuffer, tree.draw.bind(tree));
-  var controls = new Controls(tree);
-}
+    // Create the canvas and place it in the provided placeholder
+    var canvas = createCanvas(CANVASWIDTH, CANVASHEIGHT);
+    canvas.parent('canvas-placeholder');
+    canvas.style('visibility', 'visible');
 
-function draw() {
-  background(0);
+    // Create other necessary objects for the visualization
+    var tree = new Tree(TREEX, TREEY, BACKGROUNDCOLOR);
+    var explorer = new Explorer(canvas.canvas, tree.graphicsBuffer, tree.draw.bind(tree));
+    var controls = new Controls(tree)
 }

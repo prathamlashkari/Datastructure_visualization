@@ -15,7 +15,7 @@ body {
   height: 3em;
   justify-content: center;
   align-items: center;
-  gap: 33rem;
+  gap:33rem;
 }
 
 .dashboard {
@@ -37,10 +37,16 @@ body {
 
 /*  css for the buttons container */
 .btn-container {
-  margin-top: 1.5em;
+  margin-top: 1em;
   display: flex;
   justify-content: center;
-  gap: 2em;
+  gap: 1em;
+  background-color: #4242d7;
+  border-radius: 6em;
+  height: 2.1rem;
+  width: 81vw;
+  margin-left: 6rem;
+  padding: 1rem 3rem 1rem 3rem;
 
 }
 
@@ -50,6 +56,7 @@ body {
   background-color: #96e7aa;
   border-radius: 1em;
   cursor: pointer;
+  height: 2.4rem;
 }
 .buttons:hover {
   width: 6rem;
@@ -61,7 +68,7 @@ body {
 
 .inp {
   width: 16rem;
-  height: 1.6rem;
+  height: 1.9rem;
   border-color: #23fd10;
   background-color: #bcebf3;
   border-radius: 1rem;
@@ -76,10 +83,9 @@ body {
 /* css for left and right container */
 .container {
   display: flex;
-  height: 76vh;
+  height: 70vh;
   justify-content: space-between;
   max-width: 100%;
-  margin-top: 1rem;
 }
 
 
@@ -106,27 +112,31 @@ body {
   width: 100%;
   height: 72vh;
 }
+canvas.p5Canvas {
+  width: 100% !important;
+  height: 68vh !important
+}
 
 
 /* css for the traversal and instrunction box */
 
 .traverse {
   border: 2px solid black;
-  font-weight: bold;
-  background-color: #caffb7;
-  padding: 1em 2em;
-  margin: 3em 0em;
+font-weight: bold;
+background-color: #caffb7;
+padding: 1em 2em;
+margin: 1em 0em;
 border-radius: 9px;
 }
 
 .traverse p {
-  font-size: 1.4em;
+  font-size: 1.2em;
   display: inline;
 }
 
 .instrunction {
   border: 2px solid black;
-  padding: 0.4em 1.5rem;
+  padding: 0.4em 4rem;
   margin-top: 1rem;
   background-color: #caffb7;
   border-radius: 9px;
@@ -134,7 +144,12 @@ border-radius: 9px;
 
 .instrunction p {
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.instrunction-data {
+  display: block;
+  font-size: 1em;
   font-weight: bold;
 }
 
@@ -143,12 +158,13 @@ border-radius: 9px;
 
 .footerbst {
   background-color: #1a237e;
-  height: 0.7rem;
+  height: 1.7rem;
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 1.2em 1.2em;
+  padding: 1em 1.2em;
   font-size: 1.4rem;
+  margin-top: 1em;
 }
 
 /* css for the traversal box */
