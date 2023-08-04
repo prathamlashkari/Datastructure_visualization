@@ -12,14 +12,17 @@ class Controls {
 
     // Constants for the ids of various user interface elements
     static insert = "insert-btn";
-    static delete = "delete-btn";
-    static traversal = "traversal-btn";
+    // static delete = "delete-btn";
     static SEARCHID = "search-btn";
     static SLIDERID = "speed";
     static clearbtn = "clear-btn";
-
+    static inorder = "inorder-btn";
+    static preorder = "preorder-btn";
+    static postorder = "postorder-btn";
+    static datatrav = "traverse-data";
+    static popuo = "traversal-popup";
     // The number of nodes above which the user will be warned before running
-    // "Fill" or "Quick Fill"
+
     static NODELIMIT = 500
     constructor(tree) {
         this.tree = tree;
@@ -30,10 +33,15 @@ class Controls {
         // Store all of the user interface elements based on the IDs
         this.inserts = document.getElementById(Controls.insert);
         this.clearbtns = document.getElementById(Controls.clearbtn);
-        this.deleteopt = document.getElementById(Controls.delete);
+        // this.deleteopt = document.getElementById(Controls.delete);
         this.traversals = document.getElementById(Controls.traversal);
         this.searchBtn = document.getElementById(Controls.SEARCHID);
         this.speedSlider = document.getElementById(Controls.SLIDERID);
+        this.inordertrav = document.getElementById(Controls.inorder);
+        this.pretrav = document.getElementById(Controls.preorder);
+        this.posttrav = document.getElementById(Controls.postorder);
+        this.traversalDataDiv = document.getElementById(Controls.datatrav);
+        this.popup = document.getElementById(Controls.popuo);
 
         // Set the animation interval based on the slider's value
         this.setAnimationSpeed();
@@ -44,21 +52,71 @@ class Controls {
         this.clearbtns.addEventListener('click',
             () => this.triggerAnimation(this.clear));
         // this.deleteopt.addEventListener('click',
-        //     () => this.triggerAnimation(this.deletes));
-        // this.traversals.addEventListener('click',
-        // () => this.triggerAnimation(this.traverse));
+        //     () => this.triggerAnimation(this.delete()));
         this.searchBtn.addEventListener('click',
             () => this.triggerAnimation(this.search));
+
+
+
+            this.inordertrav.addEventListener('click', () => {
+                this.popup.style.display = "none";
+                Node.addinstrunction(`Apply Inorder-Traversal in binary tree`)
+                this.tree.traversalData = []; // Clear previous traversal data
+                this.triggerTraversal(this.tree.inOrderTraversalVisual.bind(this.tree, () => {
+                    // Display traversal data in the div
+                    const traversalData = this.tree.traversalData.join(', ');
+                    this.traversalDataDiv.textContent = traversalData;
+                }));
+            });
+            
+            this.pretrav.addEventListener('click', () => {
+                this.popup.style.display = "none";
+                Node.addinstrunction(`Apply Preorder Traversal in binary tree`)
+                this.tree.traversalData = []; // Clear previous traversal data
+                this.triggerTraversal(this.tree.preOrderTraversalVisual.bind(this.tree, () => {
+                    // Display traversal data in the div
+                    const traversalData = this.tree.traversalData.join(', ');
+                    this.traversalDataDiv.textContent = traversalData;
+                }));
+            });
+            
+            this.posttrav.addEventListener('click', () => {
+                this.popup.style.display = "none";
+                Node.addinstrunction(`Apply Postorder Traversal in binary  tree`)
+                this.tree.traversalData = []; // Clear previous traversal data
+                this.triggerTraversal(this.tree.postOrderTraversalVisual.bind(this.tree, () => {
+                    // Display traversal data in the div
+                    const traversalData = this.tree.traversalData.join(', ');
+                    this.traversalDataDiv.textContent = traversalData;
+                }));
+            });
+            
 
         // Append an event listener to change the animation interval
         this.speedSlider.addEventListener('input', this.setAnimationSpeed.bind(this));
     }
 
+    // Trigger the specified traversal animation
+    triggerTraversal(traversalAnimation) {
+        if (this.tree.running) {
+            alert('Please wait for the current animation to finish');
+        } else {
+            // Clear any existing traversal data
+            this.traversalDataDiv.textContent = '';
+
+            traversalAnimation.bind(this.tree)(() => {
+                // Display traversal data in the div
+                const traversalData = this.tree.traversalData.join(', ');
+                this.traversalDataDiv.textContent = traversalData;
+            });
+        }
+    }
     // Completly resets the tree, removing all nodes, stopping all animations
     clear() {
         this.tree.clear();
         this.tree.stopAnimation(() => { })
         this.tree.draw();
+        this.tree.updateTreeHeight();
         const instructionsD = document.querySelector('.instrunction-data');
         instructionsD.textContent = '';
     }
@@ -122,7 +180,7 @@ class Controls {
             Node.addinstrunction(`Adding value ${value} to the binary search tree.....`)
         }
     }
-    
+
     // Method for the search animation
     search() {
         var value = this.getNumber();
@@ -138,4 +196,14 @@ class Controls {
     setAnimationSpeed() {
         this.animationInterval = 1000 / Math.pow(10, this.speedSlider.value);
     }
+    // Method for the Delete animation
+    delete() {
+        var value = this.getNumber();
+
+        if (value !== null) {
+            this.tree.deleteValueVisual(value);
+            Node.addinstrunction(`Deleting value ${value} from the binary search tree...`);
+        }
+    }
+
 }

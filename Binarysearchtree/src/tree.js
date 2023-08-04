@@ -33,10 +33,30 @@ class Tree {
         this.running = false; // Whether or not an animation is running
         this.timeout = null;  // The current timeout, so animations can be cancelled
         this.node = null;     // The current node being animated
-
-        // Draw the tree upon creation (to show the background)
         this.draw();
+        this.traversalData = [];
+        this.treeHeight =0 ;
     }
+
+     // Calculate the height of the tree recursively
+     calculateHeight(node = this.root) {
+        if (!node.isFilled()) {
+            return 0;
+        }
+
+        const leftHeight = this.calculateHeight(node.leftNode);
+        const rightHeight = this.calculateHeight(node.rightNode);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    // Update the tree height and display it
+    updateTreeHeight() {
+        this.treeHeight = this.calculateHeight();
+        const heightDiv = document.querySelector('.height-data');
+        heightDiv.textContent = `${this.treeHeight}`;
+    }
+
 
     // Sets this instance's reference to a Controls instance so that an
     // animation interval can be set
@@ -51,10 +71,10 @@ class Tree {
 
     // Returns: a random number in the range [0, max) not yet in the tree
     uniqueRandom(max) {
-        while(true) {
+        while (true) {
             var value = Math.floor(random(0, max));
 
-            if(!this.search(value)) {
+            if (!this.search(value)) {
                 return value;
             }
         }
@@ -64,7 +84,7 @@ class Tree {
     fill(count) {
         this.clear();
 
-        for(var i = 0; i < count; i++) {
+        for (var i = 0; i < count; i++) {
             var value = this.uniqueRandom(count);
 
             this.addValue(value);
@@ -78,7 +98,7 @@ class Tree {
     addValue(value) {
         var shiftedNode = this.root.addValue(value);
         this.setCoordinates(shiftedNode);
-        
+        this.updateTreeHeight(); // Update the tree height after adding a value
     }
 
     // Wraps the Node class's search method directly
@@ -90,7 +110,7 @@ class Tree {
     // to the x and y coordinates of the tree, or allows nodes to determine
     // their own position based off their parents (by passing no arguments)
     setCoordinates(node) {
-        if(node === this.root) {
+        if (node === this.root) {
             node.setCoordinates(this.x, this.y);
         } else {
             node.setCoordinates();
@@ -101,7 +121,7 @@ class Tree {
     draw() {
         this.graphicsBuffer.background(this.backgroundColor);
 
-        if(this.root.isFilled()) {
+        if (this.root.isFilled()) {
             this.root.draw();
         }
 
@@ -126,7 +146,7 @@ class Tree {
     // the progress of the animation
     // The frame argument is a function representing one frame of the animation
     startAnimation(frame, ...args) {
-        if(this.running) {
+        if (this.running) {
             throw Error('Animation is currently running');
         } else {
             this.running = true;
@@ -152,7 +172,7 @@ class Tree {
     // tracking the progression of the animation so that a new animation can be
     // run, and runs a specified function with specified arguments when the
     // animation is complete
-    stopAnimation(complete = () => {}, ...callbackArgs) {
+    stopAnimation(complete = () => { }, ...callbackArgs) {
         this.running = false;
         this.node = null;
 
@@ -164,14 +184,14 @@ class Tree {
     // Call for starting an addValue animation
     // value is the value to add
     // complete is a callback called when the animation finishes
-    addValueVisual(value, complete = () => {}, ...callbackArgs) {
+    addValueVisual(value, complete = () => { }, ...callbackArgs) {
         this.startAnimation(this.addValueFrame, value, complete, ...callbackArgs);
     }
 
     // Single frame for the addValue animation
     // Arguments match addValueVisual
     addValueFrame(value, complete, ...callbackArgs) {
-        if(!this.node.isFilled()) {
+        if (!this.node.isFilled()) {
             this.addValue(value);          // Add the value to the data structure
 
             // this.node.paint(Node.SUCCESS); // Mark this node as inserted
@@ -181,14 +201,14 @@ class Tree {
 
         } else {
             this.node.paint(Node.VISITED); // Mark this node as visited
-                
+
             this.updateDrawing();          // Display the new color
 
             // Determine the node for the next frame
-            if(value < this.node.value) {
+            if (value < this.node.value) {
                 this.node = this.node.leftNode;
 
-            } else if(value > this.node.value) {
+            } else if (value > this.node.value) {
                 this.node = this.node.rightNode;
             }
 
@@ -197,10 +217,11 @@ class Tree {
         }
     }
 
+
     // Call for starting the search animation
     // value is the value to search for
     // complete is a callback called when the animation finishes
-    searchVisual(value, complete = () => {}, ...callbackArgs) {
+    searchVisual(value, complete = () => { }, ...callbackArgs) {
         this.startAnimation(this.searchFrame, value, complete, ...callbackArgs);
         console.log('searching visually')
     }
@@ -208,7 +229,7 @@ class Tree {
     // Single frame for the search animatino
     // Arugment match serchVisual
     searchFrame(value, complete, ...callbackArgs) {
-        if(this.node.color !== Node.VISITED) {
+        if (this.node.color !== Node.VISITED) {
             // Mark the root node as visited first, then continue the search
             this.root.paint(Node.VISITED);
 
@@ -216,19 +237,18 @@ class Tree {
 
             this.continueAnimation(this.searchFrame, value, complete, ...callbackArgs);
 
-        } else if(!this.node.isFilled()) {
+        } else if (!this.node.isFilled()) {
             // The value isn't in the tree, stop the animation
-
+            Node.addinstrunction(` Value ${value} not found in binary search tree.... \n`)
             this.stopAnimation(complete, ...callbackArgs);
 
-        } else if(this.node.value === value) {
+        } else if (this.node.value === value) {
             // The value is in this node
-
+            // Mark the node as found
             this.node.paint(Node.SUCCESS);  // Mark the node as found
-
             this.updateDrawing();           // Display the new color
-
             this.stopAnimation(complete, ...callbackArgs);
+            Node.addinstrunction(` Value ${value} found successfully  in the tree.... \n`)
 
         } else {
             // The value may be in another node
@@ -237,11 +257,11 @@ class Tree {
             var cutHalf;  // The hal of the tree that can be cut from search
 
             // Set the two variables correctly
-            if(value < this.node.value) {
+            if (value < this.node.value) {
                 nextHalf = this.node.leftNode;
                 cutHalf = this.node.rightNode;
 
-            } else if(value > this.node.value) {
+            } else if (value > this.node.value) {
                 nextHalf = this.node.rightNode;
                 cutHalf = this.node.leftNode;
             }
@@ -263,34 +283,109 @@ class Tree {
         }
     }
 
-    // Call for starting the fill animation
-    // count is the number of nodes to add
-    // complete is a callback called when the animation finishes
-    fillVisual(count, complete = () => {}) {
-        this.clear();
-
-        this.startAnimation(this.fillFrame, count, 0, complete);
-    }
-
-    // Single frame of the fill animation
-    // count is the number of nodes to add
-    // filled is the number of nodes added so far
-    // complete is a callback called when the animation finishes
-    fillFrame(count, filled, complete) {
-        if(filled === count) {
-            // Stop the animation if the correct number of nodes were inserted
-            this.stopAnimation(complete);
-        } else {
-            // Temporarily stop the fill animation to start the addValue animation
-            this.stopAnimation();
-
-            var value = this.uniqueRandom(count);
-
-            // Start the addValue animation, calling this frame again when the
-            // animation is complete, and incrementing the number of nodes
-            // filled so far
-            this.startAnimation(this.addValueFrame, value,
-                this.fillFrame.bind(this), count, filled + 1, complete);
+    // traveral section 
+    // Recursive in-order traversal method
+    inOrderTraversal(node, callback) {
+        if (node.isFilled()) {
+            this.inOrderTraversal(node.leftNode, callback);
+            callback(node);
+            this.inOrderTraversal(node.rightNode, callback);
         }
     }
+
+    // Recursive pre-order traversal method
+    preOrderTraversal(node, callback) {
+        if (node.isFilled()) {
+            callback(node);
+            this.preOrderTraversal(node.leftNode, callback);
+            this.preOrderTraversal(node.rightNode, callback);
+        }
+    }
+
+    // Recursive post-order traversal method
+    postOrderTraversal(node, callback) {
+        if (node.isFilled()) {
+            this.postOrderTraversal(node.leftNode, callback);
+            this.postOrderTraversal(node.rightNode, callback);
+            callback(node);
+        }
+    }
+
+    // ...
+
+
+    // Call for starting the in-order traversal animation
+    inOrderTraversalVisual(complete = () => { }) {
+        this.traversalData = []; // Clear previous traversal data
+        this.startAnimation(() => this.inOrderTraversalFrame(this.root, complete));
+    }
+
+    // Call for starting the pre-order traversal animation
+    preOrderTraversalVisual(complete = () => { }) {
+        this.traversalData = []; // Clear previous traversal data
+        this.startAnimation(() => this.preOrderTraversalFrame(this.root, complete));
+    }
+
+    // Call for starting the post-order traversal animation
+    postOrderTraversalVisual(complete = () => { }) {
+        this.traversalData = []; // Clear previous traversal data
+        this.startAnimation(() => this.postOrderTraversalFrame(this.root, complete));
+    }
+
+    // ...
+
+    // Single frame for in-order traversal animation
+    inOrderTraversalFrame(node, complete) {
+        this.traversalFrame(node, complete, this.inOrderTraversal.bind(this));
+    }
+
+    // Single frame for pre-order traversal animation
+    preOrderTraversalFrame(node, complete) {
+        this.traversalFrame(node, complete, this.preOrderTraversal.bind(this));
+    }
+
+    // Single frame for post-order traversal animation
+    postOrderTraversalFrame(node, complete) {
+        this.traversalFrame(node, complete, this.postOrderTraversal.bind(this));
+    }
+
+    // Single frame for traversal animations
+    traversalFrame(node, complete, traversalMethod) {
+        if (!node || !node.isFilled() || !this.running) {
+            // Traversal complete, node is empty, or animation was stopped, stop the animation
+            this.stopAnimation(() => {
+                this.traversalData = this.traversalData; // Update traversal data in the Tree instance
+                Node.addinstrunction(`Traversal complete in binary search tree....`);
+                complete();
+            });
+            return;
+        }
+    
+        // Traverse the current node and accumulate data
+        traversalMethod(node, (node) => {
+            if (!this.traversalData.includes(node.value)) {
+                Node.addinstrunction(`Visiting the node ${node.value} in binary search tree.... `)
+                this.traversalData.push(node.value);
+            }
+            node.paint(Node.VISITED);
+            this.updateDrawing();
+        });
+    
+        // Schedule the next frame with the next node in the traversal
+        this.continueAnimation(() => {
+            this.traversalFrame(this.findNextNode(node), complete, traversalMethod);
+        });
+    }
+    
+
+    // Helper method to find the next node in the traversal
+    findNextNode(node) {
+        if (node.leftNode && node.leftNode.isFilled()) {
+            return node.leftNode;
+        } else if (node.rightNode && node.rightNode.isFilled()) {
+            return node.rightNode;
+        }
+        return null;
+    }
+
 }

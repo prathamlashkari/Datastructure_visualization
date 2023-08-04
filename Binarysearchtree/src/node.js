@@ -30,7 +30,7 @@ class Node {
     static TEXTCOLOR = color(0, 0, 0);   // Text color of the node values
     static EDGECOLOR = color(0, 0, 0);   // Color of this node's upper edge
     static EDGETHICKNESS = 5;            // Thickness this node's upper edge
-
+    static DELETING_COLOR = color(255, 0, 0, 200); // Red with transparency
     // Color-related constants for visualization purposes
     static VISITED = color(0, 0, 255);  // Color when this node has been visited
     static SUCCESS = color(0, 255, 0);  // Color when this node was added/the
@@ -39,7 +39,7 @@ class Node {
     //   for is not found in this node
 
     // Constants controlling the positions of the nodes relative to one another
-    static HORIZONTALSPACING = 50; // Horizontal distance between two nodes
+    static HORIZONTALSPACING = 45; // Horizontal distance between two nodes
     static VERTICALSPACING = 120;   // Vertical distance between tow nodes
     static addinstrunction(instruction) {
         const instructionsDiv = document.querySelector('.instrunction-data');
@@ -86,7 +86,7 @@ class Node {
         this.edgeColor = edgeColor;
         this.edgeThickness = edgeThickness;
 
-    
+        this.isDeleting = false; // Flag to indicate if the node is being deleted
     }
 
     // Definition of a "filled" node that should be processed recursively
@@ -98,7 +98,7 @@ class Node {
     hasParent() {
         return this.parent !== null;
     }
-  
+
     /***
      * Adds the specified value to the structure at or below this node
      *
@@ -245,6 +245,11 @@ class Node {
         this.graphicsBuffer.textAlign(CENTER, CENTER);
         this.graphicsBuffer.textSize(this.textSize);
         this.graphicsBuffer.text(this.value, this.x, this.y + 1);
+        if (this.isDeleting) {
+            this.graphicsBuffer.fill(Node.DELETING_COLOR);
+        } else {
+            this.graphicsBuffer.fill(this.color);
+        }
     }
 
     // Recursively draws this node and all nodes below it
@@ -293,7 +298,7 @@ class Node {
 
         this.redraw();
     }
-
+  
     // Recursively set the appearnace of this node and all nodes below it to
     // defaults for the class
     resetVisuals() {
@@ -306,9 +311,12 @@ class Node {
             this.outlineweights = Node.STROKEWEIGHT
             this.edgeColor = Node.EDGECOLOR;
             this.edgeThickness = Node.EDGETHICKNESS;
-
+            this.isDeleting  = false;
             this.leftNode.resetVisuals();
             this.rightNode.resetVisuals();
         }
     }
+
+   
+
 }
