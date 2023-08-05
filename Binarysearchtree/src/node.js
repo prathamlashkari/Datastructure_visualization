@@ -25,7 +25,7 @@ class Node {
     static SIZE = 50;                    // Diameter of the nodes
     static COLOR = color(255, 200, 255); // Fill color of the nodes
     static STROKE = color(255, 204, 0);   // Outline color of the nodes
-    static STROKEWEIGHT = 5;   // Outline color of the nodes
+    static STROKEWEIGHT = 7;   // Outline color of the nodes
     static TEXTSIZE = 30;                // Text size of the node values
     static TEXTCOLOR = color(0, 0, 0);   // Text color of the node values
     static EDGECOLOR = color(0, 0, 0);   // Color of this node's upper edge
@@ -34,7 +34,7 @@ class Node {
     // Color-related constants for visualization purposes
     static VISITED = color(0, 0, 255);  // Color when this node has been visited
     static SUCCESS = color(0, 255, 0);  // Color when this node was added/the
-    //   value inside was being searched for
+    static travnode = color(225, 218, 16)
     static FAILURE = color(255, 0, 0);  // Color when the value being searched
     //   for is not found in this node
 
@@ -298,7 +298,7 @@ class Node {
 
         this.redraw();
     }
-  
+
     // Recursively set the appearnace of this node and all nodes below it to
     // defaults for the class
     resetVisuals() {
@@ -311,12 +311,12 @@ class Node {
             this.outlineweights = Node.STROKEWEIGHT
             this.edgeColor = Node.EDGECOLOR;
             this.edgeThickness = Node.EDGETHICKNESS;
-            this.isDeleting  = false;
+            this.isDeleting = false;
             this.leftNode.resetVisuals();
             this.rightNode.resetVisuals();
         }
     }
 
-   
+
 
 }
