@@ -35,11 +35,11 @@ class Tree {
         this.node = null;     // The current node being animated
         this.draw();
         this.traversalData = [];
-        this.treeHeight =0 ;
+        this.treeHeight = 0;
     }
 
-     // Calculate the height of the tree recursively
-     calculateHeight(node = this.root) {
+    // Calculate the height of the tree recursively
+    calculateHeight(node = this.root) {
         if (!node.isFilled()) {
             return 0;
         }
@@ -69,29 +69,6 @@ class Tree {
         this.root = new Node(this.graphicsBuffer);
     }
 
-    // Returns: a random number in the range [0, max) not yet in the tree
-    uniqueRandom(max) {
-        while (true) {
-            var value = Math.floor(random(0, max));
-
-            if (!this.search(value)) {
-                return value;
-            }
-        }
-    }
-
-    // Quickly fills the tree with a certain number of nodes
-    fill(count) {
-        this.clear();
-
-        for (var i = 0; i < count; i++) {
-            var value = this.uniqueRandom(count);
-
-            this.addValue(value);
-        }
-
-        this.draw();
-    }
 
     // Wraps the Node class's addValue method, and sets the coordinate of the
     // subset of the tree that needs to be adjusted after the value was added
@@ -360,23 +337,24 @@ class Tree {
             });
             return;
         }
-    
+
         // Traverse the current node and accumulate data
         traversalMethod(node, (node) => {
             if (!this.traversalData.includes(node.value)) {
                 Node.addinstrunction(`Visiting the node ${node.value} in binary search tree.... `)
                 this.traversalData.push(node.value);
+
             }
-            node.paint(Node.VISITED);
+            node.paint(Node.travnode);
             this.updateDrawing();
         });
-    
+
         // Schedule the next frame with the next node in the traversal
         this.continueAnimation(() => {
             this.traversalFrame(this.findNextNode(node), complete, traversalMethod);
         });
     }
-    
+
 
     // Helper method to find the next node in the traversal
     findNextNode(node) {
