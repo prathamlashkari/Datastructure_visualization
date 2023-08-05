@@ -58,39 +58,39 @@ class Controls {
 
 
 
-            this.inordertrav.addEventListener('click', () => {
-                this.popup.style.display = "none";
-                Node.addinstrunction(`Apply Inorder-Traversal in binary tree`)
-                this.tree.traversalData = []; // Clear previous traversal data
-                this.triggerTraversal(this.tree.inOrderTraversalVisual.bind(this.tree, () => {
-                    // Display traversal data in the div
-                    const traversalData = this.tree.traversalData.join(', ');
-                    this.traversalDataDiv.textContent = traversalData;
-                }));
-            });
-            
-            this.pretrav.addEventListener('click', () => {
-                this.popup.style.display = "none";
-                Node.addinstrunction(`Apply Preorder Traversal in binary tree`)
-                this.tree.traversalData = []; // Clear previous traversal data
-                this.triggerTraversal(this.tree.preOrderTraversalVisual.bind(this.tree, () => {
-                    // Display traversal data in the div
-                    const traversalData = this.tree.traversalData.join(', ');
-                    this.traversalDataDiv.textContent = traversalData;
-                }));
-            });
-            
-            this.posttrav.addEventListener('click', () => {
-                this.popup.style.display = "none";
-                Node.addinstrunction(`Apply Postorder Traversal in binary  tree`)
-                this.tree.traversalData = []; // Clear previous traversal data
-                this.triggerTraversal(this.tree.postOrderTraversalVisual.bind(this.tree, () => {
-                    // Display traversal data in the div
-                    const traversalData = this.tree.traversalData.join(', ');
-                    this.traversalDataDiv.textContent = traversalData;
-                }));
-            });
-            
+        this.inordertrav.addEventListener('click', () => {
+            this.popup.style.display = "none";
+            Node.addinstrunction(`Apply Inorder-Traversal in binary tree`)
+            this.tree.traversalData = []; // Clear previous traversal data
+            this.triggerTraversal(this.tree.inOrderTraversalVisual.bind(this.tree, () => {
+                // Display traversal data in the div
+                const traversalData = this.tree.traversalData.join(', ');
+                this.traversalDataDiv.textContent = traversalData;
+            }));
+        });
+
+        this.pretrav.addEventListener('click', () => {
+            this.popup.style.display = "none";
+            Node.addinstrunction(`Apply Preorder Traversal in binary tree`)
+            this.tree.traversalData = []; // Clear previous traversal data
+            this.triggerTraversal(this.tree.preOrderTraversalVisual.bind(this.tree, () => {
+                // Display traversal data in the div
+                const traversalData = this.tree.traversalData.join(', ');
+                this.traversalDataDiv.textContent = traversalData;
+            }));
+        });
+
+        this.posttrav.addEventListener('click', () => {
+            this.popup.style.display = "none";
+            Node.addinstrunction(`Apply Postorder Traversal in binary  tree`)
+            this.tree.traversalData = []; // Clear previous traversal data
+            this.triggerTraversal(this.tree.postOrderTraversalVisual.bind(this.tree, () => {
+                // Display traversal data in the div
+                const traversalData = this.tree.traversalData.join(', ');
+                this.traversalDataDiv.textContent = traversalData;
+            }));
+        });
+
 
         // Append an event listener to change the animation interval
         this.speedSlider.addEventListener('input', this.setAnimationSpeed.bind(this));
@@ -117,6 +117,7 @@ class Controls {
         this.tree.stopAnimation(() => { })
         this.tree.draw();
         this.tree.updateTreeHeight();
+        this.traversalDataDiv.textContent = "";
         const instructionsD = document.querySelector('.instrunction-data');
         instructionsD.textContent = '';
     }
