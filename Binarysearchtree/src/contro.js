@@ -12,7 +12,7 @@ class Controls {
 
     // Constants for the ids of various user interface elements
     static insert = "insert-btn";
-    // static delete = "delete-btn";
+    static delete = "delete-btn";
     static SEARCHID = "search-btn";
     static SLIDERID = "speed";
     static clearbtn = "clear-btn";
@@ -33,7 +33,7 @@ class Controls {
         // Store all of the user interface elements based on the IDs
         this.inserts = document.getElementById(Controls.insert);
         this.clearbtns = document.getElementById(Controls.clearbtn);
-        // this.deleteopt = document.getElementById(Controls.delete);
+        this.deleteopt = document.getElementById(Controls.delete);
         this.traversals = document.getElementById(Controls.traversal);
         this.searchBtn = document.getElementById(Controls.SEARCHID);
         this.speedSlider = document.getElementById(Controls.SLIDERID);
@@ -52,7 +52,7 @@ class Controls {
         this.clearbtns.addEventListener('click',
             () => this.triggerAnimation(this.clear));
         // this.deleteopt.addEventListener('click',
-        //     () => this.triggerAnimation(this.delete()));
+        // () => this.triggerAnimation(this.delete()));
         this.searchBtn.addEventListener('click',
             () => this.triggerAnimation(this.search));
 
@@ -92,6 +92,8 @@ class Controls {
         });
 
 
+
+
         // Append an event listener to change the animation interval
         this.speedSlider.addEventListener('input', this.setAnimationSpeed.bind(this));
     }
@@ -111,6 +113,10 @@ class Controls {
             });
         }
     }
+
+
+
+
     // Completly resets the tree, removing all nodes, stopping all animations
     clear() {
         this.tree.clear();
@@ -149,25 +155,25 @@ class Controls {
         }
     }
 
-    // Method for the Quick Fill animation
-    quickFill() {
-        var count = this.getNumber("Number of nodes: ");
+    // // Method for the Quick Fill animation
+    // quickFill() {
+    //     var count = this.getNumber("Number of nodes: ");
 
-        if (count !== null && (count < Controls.NODELIMIT ||
-            confirm(count + ' nodes may reduce performance. Continue anyways?'))) {
-            this.tree.fill(count);
-        }
-    }
+    //     if (count !== null && (count < Controls.NODELIMIT ||
+    //         confirm(count + ' nodes may reduce performance. Continue anyways?'))) {
+    //         this.tree.fill(count);
+    //     }
+    // }
 
     // Method for the Fill animation
-    slowFill() {
-        var count = this.getNumber("Number of nodes: ");
+    // slowFill() {
+    //     var count = this.getNumber("Number of nodes: ");
 
-        if (count !== null && (count < Controls.NODELIMIT ||
-            confirm(count + ' nodes may reduce performance. Continue anyways?'))) {
-            this.tree.fillVisual(count);
-        }
-    }
+    //     if (count !== null && (count < Controls.NODELIMIT ||
+    //         confirm(count + ' nodes may reduce performance. Continue anyways?'))) {
+    //         this.tree.fillVisual(count);
+    //     }
+    // }
 
     // Method for the Add animation
     add() {
